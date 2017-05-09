@@ -1,6 +1,8 @@
+#!groovy​
 pipeline {
     agent { docker 'maven:3.3.9' }
     stages {
+        String m2Tool = tool 'mvn-3'
         stage ('Clone sources') {
             steps {
                 git url: 'https://github.com/titusn/gs-maven.git'
@@ -9,8 +11,6 @@ pipeline {
 
         stage ('Artifactory configuration') {
             steps {
-                // Tool name from Jenkins configuration
-                rtMaven.tool = "Maven-3.3.9"
                 // Set Artifactory repositories for dependencies resolution and artifacts deployment.
                 //rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
                 //rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
@@ -19,7 +19,10 @@ pipeline {
 
         stage ('Maven build') {
             steps {
-                def buildInfo = rtMaven.run pom: 'gs-maven/pom.xml', goals: 'clean install'
+                withEnv(["M2_HOME=$m2Tool"]) {
+                    String mvn = "\"$m2Tool/bin/mvn\" ${mvnOptions.join(' ')} $mavenArgs"
+                    cli "$mvn clean install"
+                }
             }
         }
     }
