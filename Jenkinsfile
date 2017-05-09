@@ -2,7 +2,6 @@
 pipeline {
     agent { docker 'maven:3.3.9' }
     stages {
-        String m2Tool = tool 'mvn-3'
         stage ('Clone sources') {
             steps {
                 git url: 'https://github.com/titusn/gs-maven.git'
@@ -19,6 +18,7 @@ pipeline {
 
         stage ('Maven build') {
             steps {
+                String m2Tool = tool 'mvn-3'
                 withEnv(["M2_HOME=$m2Tool"]) {
                     String mvn = "\"$m2Tool/bin/mvn\" ${mvnOptions.join(' ')} $mavenArgs"
                     cli "$mvn clean install"
