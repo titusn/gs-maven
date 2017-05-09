@@ -1,8 +1,8 @@
 pipeline {
-    agent { docker 'maven:3.3.3' }
+    agent { docker 'maven:3.3.9' }
     stages {
         stage 'Clone sources'
-        git url: 'https://github.com/titusn/gs-maven'
+        git url: 'https://github.com/titusn/gs-maven.git'
 
         stage 'Artifactory configuration'
         // Tool name from Jenkins configuration
