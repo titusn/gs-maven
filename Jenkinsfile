@@ -8,17 +8,9 @@ pipeline {
             }
         }
 
-        stage ('Artifactory configuration') {
-            steps {
-                // Set Artifactory repositories for dependencies resolution and artifacts deployment.
-                //rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
-                //rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
-            }
-        }
-
         stage ('Maven build') {
+            String m2Tool = tool 'mvn-3'
             steps {
-                String m2Tool = tool 'mvn-3'
                 withEnv(["M2_HOME=$m2Tool"]) {
                     String mvn = "\"$m2Tool/bin/mvn\" ${mvnOptions.join(' ')} $mavenArgs"
                     cli "$mvn clean install"
