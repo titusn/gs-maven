@@ -8,9 +8,27 @@ pipeline {
             }
         }
 
-        stage ('Maven build') {
+        stage ('Maven clean') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean'
+            }
+        }
+
+        stage ('Maven compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+
+        stage ('Maven test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage ('Maven install') {
+            steps {
+                sh 'mvn install'
             }
         }
     }
