@@ -1,7 +1,8 @@
-#!groovy​
+#!groovy
 pipeline {
     agent { docker 'maven:3.3.9' }
     stages {
+        def maven = tool name: 'maven_latest', type: 'maven'
         stage ('Clone sources') {
             steps {
                 git url: 'https://github.com/titusn/gs-maven.git'
@@ -10,25 +11,25 @@ pipeline {
 
         stage ('Maven clean') {
             steps {
-                sh 'mvn clean'
+                sh '$maven clean'
             }
         }
 
         stage ('Maven compile') {
             steps {
-                sh 'mvn compile'
+                sh '$maven compile'
             }
         }
 
         stage ('Maven test') {
             steps {
-                sh 'mvn test'
+                sh '$maven test'
             }
         }
 
         stage ('Maven install') {
             steps {
-                sh 'mvn install'
+                sh '$maven install'
             }
         }
     }
