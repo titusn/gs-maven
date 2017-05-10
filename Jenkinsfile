@@ -1,14 +1,7 @@
 #!groovy
 
 pipeline {
-    agent { docker 'maven:3.3.9' }
-    tools {
-        maven 'maven_latest'
-        jdk 'jdk_latest'
-    }
-    environment {
-        JAVA_HOME = tool 'jdk_latest'
-    }
+    agent { docker 'maven:3.3.9-jdk-8' }
     stages {
         stage ('Clone sources') {
             steps {
@@ -18,8 +11,6 @@ pipeline {
 
         stage ('Maven clean') {
             steps {
-                sh "echo $JAVA_HOME"
-                sh "$JAVA_HOME/bin/java -version"
                 sh "mvn clean"
             }
         }
