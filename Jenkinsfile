@@ -6,6 +6,9 @@ pipeline {
         maven 'maven_latest'
         jdk 'jdk_latest'
     }
+    environment {
+        JAVA_HOME = tool 'jdk_latest'
+    }
     stages {
         stage ('Clone sources') {
             steps {
