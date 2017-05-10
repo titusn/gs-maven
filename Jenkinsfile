@@ -19,7 +19,7 @@ pipeline {
         stage ('Maven clean') {
             steps {
                 sh "echo $JAVA_HOME"
-                sh "java -version"
+                sh "$JAVA_HOME/bin/java -version"
                 sh "mvn clean"
             }
         }
