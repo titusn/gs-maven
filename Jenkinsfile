@@ -1,8 +1,8 @@
 #!groovy
 
-def mavendir = tool 'maven_latest'
-def maven = "$mavendir/bin/mvn"
 pipeline {
+    def mavendir = tool 'maven_latest'
+    def maven = "$mavendir/bin/mvn"
     agent { docker 'maven:3.3.9' }
     stages {
         stage ('Clone sources') {
