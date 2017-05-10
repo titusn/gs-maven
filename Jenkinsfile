@@ -2,6 +2,9 @@
 
 pipeline {
     agent { docker 'maven:3.3.9' }
+    tools {
+        maven 'maven_latest'
+    }
     stages {
         stage ('Clone sources') {
             steps {
@@ -11,25 +14,25 @@ pipeline {
 
         stage ('Maven clean') {
             steps {
-                sh "${tool 'maven_latest'}/bin/mvn clean"
+                sh "mvn clean"
             }
         }
 
         stage ('Maven compile') {
             steps {
-                sh "${tool 'maven_latest'}/bin/mvn compile"
+                sh "mvn compile"
             }
         }
 
         stage ('Maven test') {
             steps {
-                sh "${tool 'maven_latest'}/bin/mvn test"
+                sh "mvn test"
             }
         }
 
         stage ('Maven install') {
             steps {
-                sh "${tool 'maven_latest'}/bin/mvn install"
+                sh "mvn install"
             }
         }
     }
