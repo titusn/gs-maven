@@ -4,6 +4,7 @@ pipeline {
     agent { docker 'maven:3.3.9' }
     tools {
         maven 'maven_latest'
+        jdk 'jdk_latest'
     }
     stages {
         stage ('Clone sources') {
