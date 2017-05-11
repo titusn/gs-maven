@@ -4,6 +4,7 @@ pipeline {
     agent {
         dockerfile {
             filename 'Dockerfile'
+            args '-H 10.1.10:150:2375'
         }
     }
     stages {
