@@ -4,7 +4,7 @@ pipeline {
     agent {
         dockerfile {
             filename 'Dockerfile'
-            label 'slave unix docker'
+            label 'slave&&unix&&docker'
         }
     }
     stages {
