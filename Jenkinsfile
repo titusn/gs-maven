@@ -1,19 +1,7 @@
 #!groovy
 
 pipeline {
-    agent {
-        dockerfile {
-            filename 'Dockerfile'
-            label 'slave&&unix&&docker'
-        }
-    }
     stages {
-        stage ('Clone sources') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage ('Maven clean') {
             steps {
                 sh "mvn clean"
