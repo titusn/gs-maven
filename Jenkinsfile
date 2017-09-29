@@ -1,6 +1,9 @@
 #!groovy
 
 pipeline {
+    agent {
+
+    }
     stages {
         stage ('Maven clean') {
             steps {
